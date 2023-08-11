@@ -16,6 +16,11 @@ html {
   font-family: 'Fira Sans Condensed', sans-serif;
   font-size: 18px;
   background-color: #1b1919;
+  /*1.1 Расположить блок .content посередине .page:*/
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  min-height: 100vh;
 }
 
 h1,
@@ -35,4 +40,129 @@ fieldset {
 ul,
 ol {
   list-style: none;
+}
+/*1.2 Расположить элементы .content в строку, прижав к низу вертикальной оси:*/
+.content {
+  display: flex;
+  flex-direction: row;
+  justify-content: space-between;
+  align-items: flex-end;
+  /*1.3 Задать горизонтальные размеры .content и отступы между его элементами:*/
+  width: 1140px;
+  gap: 30px;
+}
+/*1.4 Расположить элементы .search-form в строку
+и пропорционально распределить между ними свободное пространство,
+прижать их к началу контейнера:*/
+.search-form {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+}
+/*1.5 Установить вертикальный размер для .content__list 
+и добавить скролл при переполнении:*/
+.content__list {
+  min-width: 399px;
+  height: 298px;
+  overflow-y: auto;
+  /* 3.1 Позиционирование прелоадеров*/
+  position: relative;
+}
+/*1.6 Растянуть .content__details во всю доступную ширину и высоту контейнера
+ и добавить отступы между заголовком и зоной с карточками:*/
+ .content__details {
+  width: 100%;
+  height: 100%;
+  margin-top: 26px;
+  padding: 30px;
+}
+
+/*2.1 Задать размеры контейнеру .result__video-container и добавить отступ снизу:*/
+.result__video-container {
+  width: 711px;
+  height: 386px;
+  margin-bottom: 16px;
+  /* 3.1 Позиционирование прелоадеров*/
+  position: relative;
+}
+/*2.2 Замостить видео в контейнере:*/
+.result__video-container video {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+}
+/*2.3 Создать вертикальные отступы между элементами .content__list-item (кроме последнего):*/
+.content__list-item:not(:last-child) {
+  margin-bottom: 16px;
+}
+/*2.4 Расположить элементы внутри контейнера .content__video-card в строку, прижав к началу:*/
+.content__video-card {
+  display: flex;
+  flex-direction: row;
+  align-items: flex-start;
+}
+/*2.5 Задать размеры .content__video-card-thumbnail и замостить в них изображение:*/
+.content__video-card-thumbnail {
+  width: 194px;
+  height: 103px;
+}
+
+.content__video-card-thumbnail img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+}
+/*2.6 Сделать так, чтобы .content__video-card-description-container занимал всё доступное пространство:*/
+.content__video-card-description-container {
+  flex:1;
+}
+/*4.1 Оформить текст элементов .search-form__fieldset-title.
+Jбратить внимание на вес шрифта, размер, отступы.*/
+.search-form__fieldset-title {
+  color: #FFF;
+  font-family: 'Fira Sans Condensed', sans-serif;
+  font-size: 18px;
+  font-style: normal;
+  font-weight: 400;
+  line-height: normal;
+  gap:5px;
+}
+/*4.2 Оформить элемент .title и вложенный в него .content__accent*/
+.content__accent {
+  color:#545050;
+  font-family: Oswald;
+  font-size: 75px;
+  font-style: normal;
+  font-weight: 700;
+  line-height: 94%; /* 70.5px */
+}
+.title {
+  color: #FFF;
+  font-family: Oswald;
+  font-size: 75px;
+  font-style: normal;
+  font-weight: 700;
+  line-height: 94%;
+  text-transform: uppercase;
+  margin-bottom: 26px;
+}
+/* 4.3 Стили для .content__card-link */
+.content__card-link {
+  text-decoration: none;
+  color: #FFF;
+}
+/* 4.4 Стили для .content__video-card-title */
+.content__video-card-title {
+  color: #FFF;
+  font-family: 'Oswald', sans-serif;
+  font-size: 30px;
+  font-style: normal;
+  font-weight: 700;
+  line-height: 100%; /* 30px */
+  text-transform: uppercase;
+  margin-bottom: 6px;
+}
+/* 4.5 Стили для .content__video-card-description */
+.content__video-card-description {
+  line-height: 16.2px; /* 90% */
 }
