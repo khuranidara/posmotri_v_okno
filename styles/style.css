@@ -116,6 +116,15 @@ ol {
 .content__video-card-description-container {
   flex:1;
 }
+/* 5.1 поля формы*/
+.search-form__fieldset {
+  border: none;
+}
+/*5.2 поля формы*/
+.search-form__label {
+  display: flex;
+  width: fit-content;
+}
 /*4.1 Оформить текст элементов .search-form__fieldset-title.
 Jбратить внимание на вес шрифта, размер, отступы.*/
 .search-form__fieldset-title {
@@ -165,4 +174,88 @@ Jбратить внимание на вес шрифта, размер, отс�
 /* 4.5 Стили для .content__video-card-description */
 .content__video-card-description {
   line-height: 16.2px; /* 90% */
+}
+/* 5 Шаг паттерн*/
+.visually-hidden {
+  position: absolute;
+  inline-size: 1px;
+  block-size: 1px;
+  overflow: hidden;
+  clip: rect(0 0 0 0);
+  clip-path: inset(50%);
+  white-space: nowrap;
+} 
+/* 5.3 Установка cursor: pointer;*/
+.search-form__submit-button, /*Кнопка "Найти"*/
+.search-form__pseudo-checkbox, /*Элементы чекбоксов*/
+.more-button, /*"Показать еще"*/
+a {
+  cursor: pointer;
+}
+/* 5.4 Поле ввода*/
+.search-form__textfield {
+  border: none;
+  border-top: 1px solid white;
+  border-bottom: 1px solid white;
+  background-color: transparent;
+  margin-top: 5px;
+  /* 5.6 */
+  appearance: none;
+}
+/* 5.5 Чек-боксы в лин*/
+.search-form__checkbox-list {
+  display: flex;
+  flex-direction: row;
+  flex-wrap: wrap;
+  gap: 10px; /* Расстояние между чекбоксами */
+  align-items:stretch; /* Выравнивание по центру по вертикали */
+  margin-top: 5px;
+}
+/* 5.7*/
+.search-form__pseudo-checkbox {
+  display: inline-block;
+  width: 16px; /* Ширина квадрата */
+  height: 16px; /* Высота квадрата */
+  background-color: transparent;
+  border: 1px solid white; /* Граница */
+  box-sizing: border-box;
+  margin-right: 8px; /* Расстояние между псевдо-чекбоксом и текстом */
+  position: relative;
+}
+.button {
+  cursor: pointer;
+  border: 1px solid white;
+  background-color: transparent;
+  padding: 10px 20px;
+  color: #FFF;
+  text-align: center;
+  font-family: Fira Sans Condensed;
+  font-size: 18px;
+  font-style: normal;
+  font-weight: 700;
+  line-height: normal;
+}
+
+.button:hover {
+  text-decoration: underline;
+}
+/*кнопка в форме*/
+.search-form__submit-button {
+  display: flex;
+  width: 194px;
+  height: 34px;
+  justify-content: center;
+  align-items: center;
+  gap: 10px;
+  flex-shrink: 0;
+}
+/*кнопка в списке карточек*/
+.more-button {
+  display: flex;
+  width: 399px;
+  height: 34px;
+  justify-content: center;
+  align-items: center;
+  gap: 10px;
+  flex-shrink: 0;
 }
