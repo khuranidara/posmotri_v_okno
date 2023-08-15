@@ -199,9 +199,12 @@ a {
 }
 /* 5.4 Поле ввода*/
 .search-form__textfield {
+  outline: none;
   border: none;
   border-top: 1px solid white;
+  border-right: 1px solid transparent;
   border-bottom: 1px solid white;
+  border-left: 1px solid transparent;
   background-color: transparent;
   margin-top: 5px;
   display: flex;
@@ -216,18 +219,16 @@ a {
   /* 5.6 */
   appearance: none;
 }
-
-.search-form__textfield:focus,
-.search-form__textfield:focus-visible {
-  outline: 1px solid #FFF;
-  outline-offset: 2px;
-}
-
 .search-form__textfield:active {
-  border: 1px solid #FFF;
-  outline: none;
+  border: 1px solid white !important;
+  outline: none !important;
 }
-
+.search-form__textfield:focus {
+  border-left: none;
+  border-right: none;
+  outline-offset: 2px;
+  outline: 2px solid white; /* Цвет и толщина outline по вашему усмотрению */
+}
 /* 5.5 Чек-боксы в лин*/
 .search-form__checkbox-list {
   display: flex;
@@ -262,26 +263,13 @@ a {
   left: 50%;
   transform: translate(-50%, -50%);
 }
-/* Стили для фокусного состояния чекбокса и лейбла с общей тонкой обводкой (обводит отдельно квадрат, отдельно лейбл :с) */
-.search-form__checkbox:focus-visible + .search-form__pseudo-checkbox,
-.search-form__checkbox:focus-visible + .search-form__pseudo-checkbox + .search-form__label-text {
-  outline: 2px solid white;
-  outline-offset: -2px;
-}
-/*Подчёркивание текста при наведении на лейбл, относящийся к чекбоксу (подчеркивался еще и placeholder :с)*/
-/*.search-form__label-text:hover {
+.search-form__label:hover .search-form__label-text {
   text-decoration: underline;
   text-underline-position: under;
-  cursor: pointer;
 }
-/* применяется не только к чекбоксам, но и input :с*/
-/*.search-form__label:has(:focus-visible) {
+.search-form__checkbox-label:has(:focus-visible) {
   outline: 1px solid white;
-  padding-top: 1px;
-  padding-right: 1px;
-  padding-left: 1px;
-}*/
-
+}
 .button {
   cursor: pointer;
   border: 1px solid white;
@@ -295,21 +283,17 @@ a {
   font-weight: 700;
   line-height: normal;
 }
+.button:active {
+  background-color: #545050;
+  outline: none !important; /* Убедимся, что нет контура */
+  text-decoration: none !important; /* Убедимся, что нет подчеркивания */
+}
 .button:hover {
   text-decoration: underline;
 }
 .button:focus {
-  outline: none; 
-  position: relative;
-}
-.button:focus::before {
-  content: "";
-  position: absolute;
-  top: -3px; 
-  left: -2px;
-  right: -2px; 
-  bottom: -3px; 
-  border: 1px solid white;
+  outline: 2px solid white; /* Желаемый контур */
+  outline-offset: 2px; /* Отступ контура */
 }
 /*кнопка в форме*/
 .search-form__submit-button {
@@ -345,14 +329,24 @@ a {
 }
 
 /*Шаг 7. текущая карточка*/
-.content__card-link_current {
-  display: block;
-  background: #545050;
+.content__card-link_current .content__video-card {
+  background-color: #545050;
 }
-/*Другие состояния карточки*/
-/* Состояние hover */
-.content__card-link:hover .content__video-card-title,
-.content__card-link:hover .content__video-card-description {
+li .content__card-link:hover .content__video-card-title,
+li .content__card-link:hover .content__video-card-description {
   text-decoration: underline;
   text-underline-position: under;
+}
+
+/* Состояние :active */
+.content__card-link:active .content__video-card {
+  background-color: #545050;
+}
+/* Сброс обводки для состояния :focus */
+li .content__card-link:focus {
+  outline: none;
+}
+
+li .content__card-link:focus-visible .content__video-card {
+  border: 1px solid white;
 }
