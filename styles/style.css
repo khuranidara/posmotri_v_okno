@@ -1,0 +1,358 @@
+*,
+*::before,
+*::after {
+  box-sizing: border-box;
+}
+
+html {
+  block-size: 100%;
+}
+
+.page {
+  inline-size: 1200px;
+  block-size: 100%;
+  margin: auto;
+  color: #fff;
+  font-family: 'Fira Sans Condensed', sans-serif;
+  font-size: 18px;
+  background-color: #1b1919;
+  /*1.1 Расположить блок .content посередине .page:*/
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  min-height: 100vh;
+}
+
+h1,
+h2,
+h3,
+h4,
+p,
+ul,
+ol,
+li,
+blockquote,
+fieldset {
+  margin: 0;
+  padding: 0;
+}
+
+ul,
+ol {
+  list-style: none;
+}
+/*1.2 Расположить элементы .content в строку, прижав к низу вертикальной оси:*/
+.content {
+  display: flex;
+  flex-direction: row;
+  justify-content: space-between;
+  align-items: flex-end;
+  /*1.3 Задать горизонтальные размеры .content и отступы между его элементами:*/
+  width: 1140px;
+  gap: 30px;
+}
+/*1.4 Расположить элементы .search-form в строку
+и пропорционально распределить между ними свободное пространство,
+прижать их к началу контейнера:*/
+.search-form {
+  display: flex;
+  flex-direction: row;
+  justify-content: space-between;
+  align-items: start;
+}
+/*1.5 Установить вертикальный размер для .content__list 
+и добавить скролл при переполнении:*/
+.content__list {
+  min-width: 399px;
+  height: 298px;
+  overflow-y: auto;
+  /* 3.1 Позиционирование прелоадеров*/
+  position: relative;
+  /* Скрываем дорожку скроллбара по желанию*/
+  scrollbar-width: none;
+  -ms-overflow-style: none;
+}
+/*1.6 Растянуть .content__details во всю доступную ширину и высоту контейнера
+ и добавить отступы между заголовком и зоной с карточками:*/
+ .content__details {
+  width: 100%;
+  height: 100%;
+  margin-top: 26px;
+  padding: 30px;
+}
+
+/*2.1 Задать размеры контейнеру .result__video-container и добавить отступ снизу:*/
+.result__video-container {
+  width: 711px;
+  height: 386px;
+  margin-bottom: 16px;
+  /* 3.1 Позиционирование прелоадеров*/
+  position: relative;
+}
+/*2.2 Замостить видео в контейнере:*/
+.result__video-container video {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+}
+/*2.3 Создать вертикальные отступы между элементами .content__list-item (кроме последнего):*/
+.content__list-item:not(:last-child) {
+  margin-bottom: 16px;
+}
+/*2.4 Расположить элементы внутри контейнера .content__video-card в строку, прижав к началу:*/
+.content__video-card {
+  display: flex;
+  flex-direction: row;
+  align-items: flex-start;
+}
+/*2.5 Задать размеры .content__video-card-thumbnail и замостить в них изображение:*/
+.content__video-card-thumbnail {
+  width: 194px;
+  height: 103px;
+}
+.content__video-card-thumbnail img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+}
+/*2.6 Сделать так, чтобы .content__video-card-description-container занимал всё доступное пространство:*/
+.content__video-card-description-container {
+  flex:1;
+}
+/* 5.1 поля формы*/
+.search-form__fieldset {
+  border: none;
+}
+/*5.2 поля формы*/
+.search-form__label {
+  display: flex;
+  width: fit-content;
+  /*чтобы у чекбоксов не было отступа при просмотре с клавы*/
+  margin-bottom: 0;
+}
+/*4.1 Оформить текст элементов .search-form__fieldset-title.
+Обратить внимание на вес шрифта, размер, отступы.*/
+.search-form__fieldset-title {
+  color: #FFF;
+  font-family: 'Fira Sans Condensed', sans-serif;
+  font-size: 18px;
+  font-style: normal;
+  font-weight: 400;
+  line-height: normal;
+  gap: 5px;
+}
+/*4.2 Оформить элемент .title и вложенный в него .content__accent*/
+.content__accent {
+  color:#545050;
+  font-family: Oswald;
+  font-size: 75px;
+  font-style: normal;
+  font-weight: 700;
+  line-height: 94%; /* 70.5px */
+}
+.title {
+  color: #FFF;
+  font-family: Oswald;
+  font-size: 75px;
+  font-style: normal;
+  font-weight: 700;
+  line-height: 94%;
+  text-transform: uppercase;
+  margin-bottom: 26px;
+}
+/* 4.3 Стили для .content__card-link */
+.content__card-link {
+  text-decoration: none;
+  color: #FFF;
+}
+/* 4.4 Стили для .content__video-card-title */
+.content__video-card-title {
+  color: #FFF;
+  font-family: 'Oswald', sans-serif;
+  font-size: 30px;
+  font-style: normal;
+  font-weight: 700;
+  line-height: 100%; /* 30px */
+  text-transform: uppercase;
+  margin-bottom: 6px;
+}
+/* 4.5 Стили для .content__video-card-description */
+.content__video-card-description {
+  line-height: 16.2px; /* 90% */
+}
+/* 5 Шаг паттерн*/
+.visually-hidden {
+  position: absolute;
+  inline-size: 1px;
+  block-size: 1px;
+  overflow: hidden;
+  clip: rect(0 0 0 0);
+  clip-path: inset(50%);
+  white-space: nowrap;
+} 
+/* 5.3 Установка cursor: pointer;*/
+.search-form__submit-button, /*Кнопка "Найти"*/
+.search-form__pseudo-checkbox, /*Элементы чекбоксов*/
+.more-button, /*"Показать еще"*/
+a {
+  cursor: pointer;
+}
+/* 5.4 Поле ввода*/
+.search-form__textfield {
+  border: none;
+  border-top: 1px solid white;
+  border-bottom: 1px solid white;
+  background-color: transparent;
+  margin-top: 5px;
+  display: flex;
+  gap: 10px;
+  width: 225px;
+  height: 27px;
+  color: rgba(255, 255, 255, 0.70);
+  font-family: Fira Sans Condensed;  
+  font-size: 18px;
+  font-weight: 400;
+  align-items: center;
+  /* 5.6 */
+  appearance: none;
+}
+
+.search-form__textfield:focus,
+.search-form__textfield:focus-visible {
+  outline: 1px solid #FFF;
+  outline-offset: 2px;
+}
+
+.search-form__textfield:active {
+  border: 1px solid #FFF;
+  outline: none;
+}
+
+/* 5.5 Чек-боксы в лин*/
+.search-form__checkbox-list {
+  display: flex;
+  flex-direction: row;
+  flex-wrap: wrap;
+  gap: 10px; /* Расстояние между чекбоксами */
+  align-items:stretch; /* Выравнивание по центру по вертикали */
+  margin-top: 5px;
+}
+/* 5.7*/
+.search-form__pseudo-checkbox  {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 19px; /* Ширина квадрата */
+  height: 19px; /* Высота квадрата */
+  background-color: transparent;
+  border: 1px solid white;
+  box-sizing: content-box;
+  margin-right: 8px; /* Расстояние между псевдо-чекбоксом и текстом */
+  position: relative;
+}
+/* Псевдоэлемент для активного чекбокса */
+.search-form__checkbox:checked + .search-form__pseudo-checkbox::before {
+  content: '';
+  display: block;
+  background-color: white;
+  width: 17px;
+  height: 17px;
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+}
+/* Стили для фокусного состояния чекбокса и лейбла с общей тонкой обводкой (обводит отдельно квадрат, отдельно лейбл :с) */
+.search-form__checkbox:focus-visible + .search-form__pseudo-checkbox,
+.search-form__checkbox:focus-visible + .search-form__pseudo-checkbox + .search-form__label-text {
+  outline: 2px solid white;
+  outline-offset: -2px;
+}
+/*Подчёркивание текста при наведении на лейбл, относящийся к чекбоксу (подчеркивался еще и placeholder :с)*/
+/*.search-form__label-text:hover {
+  text-decoration: underline;
+  text-underline-position: under;
+  cursor: pointer;
+}
+/* применяется не только к чекбоксам, но и input :с*/
+/*.search-form__label:has(:focus-visible) {
+  outline: 1px solid white;
+  padding-top: 1px;
+  padding-right: 1px;
+  padding-left: 1px;
+}*/
+
+.button {
+  cursor: pointer;
+  border: 1px solid white;
+  background-color: transparent;
+  padding: 10px 20px;
+  color: #FFF;
+  text-align: center;
+  font-family: Fira Sans Condensed;
+  font-size: 18px;
+  font-style: normal;
+  font-weight: 700;
+  line-height: normal;
+}
+.button:hover {
+  text-decoration: underline;
+}
+.button:focus {
+  outline: none; 
+  position: relative;
+}
+.button:focus::before {
+  content: "";
+  position: absolute;
+  top: -3px; 
+  left: -2px;
+  right: -2px; 
+  bottom: -3px; 
+  border: 1px solid white;
+}
+/*кнопка в форме*/
+.search-form__submit-button {
+  display: flex;
+  width: 194px;
+  height: 34px;
+  justify-content: center;
+  align-items: center;
+  gap: 10px;
+  flex-shrink: 0;
+}
+/*кнопка в списке карточек*/
+.more-button {
+  display: flex;
+  width: 399px;
+  height: 34px;
+  justify-content: center;
+  align-items: center;
+  gap: 10px;
+  flex-shrink: 0;
+}
+/* Применение стилей к скроллбару по желанию */
+.content__list::-webkit-scrollbar {
+  width: 5px; /* Ширина скроллбара */
+
+}
+.content__list::-webkit-scrollbar-thumb {
+  background-color: rgba(0, 0, 0, 0.5); /* Цвет ползунка */
+  border-radius: 5px; /* Закругление ползунка */
+}
+.content__list::-webkit-scrollbar-thumb:hover {
+  background-color: rgba(0, 0, 0, 0.7); /* Цвет ползунка при наведении */
+}
+
+/*Шаг 7. текущая карточка*/
+.content__card-link_current {
+  display: block;
+  background: #545050;
+}
+/*Другие состояния карточки*/
+/* Состояние hover */
+.content__card-link:hover .content__video-card-title,
+.content__card-link:hover .content__video-card-description {
+  text-decoration: underline;
+  text-underline-position: under;
+}
