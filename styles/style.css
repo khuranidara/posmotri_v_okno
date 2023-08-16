@@ -16,6 +16,9 @@ html {
   font-family: 'Fira Sans Condensed', sans-serif;
   font-size: 18px;
   background-color: #1b1919;
+  /*pixel perfect*/
+  margin-top: 30px;
+  /*pixel perfect*/
   /*1.1 Расположить блок .content посередине .page:*/
   display: flex;
   justify-content: center;
@@ -58,7 +61,7 @@ ol {
   display: flex;
   flex-direction: row;
   justify-content: space-between;
-  align-items: start;
+  align-items: flex-start;
 }
 /*1.5 Установить вертикальный размер для .content__list 
 и добавить скролл при переполнении:*/
@@ -79,10 +82,11 @@ ol {
 /*1.6 Растянуть .content__details во всю доступную ширину и высоту контейнера
  и добавить отступы между заголовком и зоной с карточками:*/
  .content__details {
-  width: 100%;
-  height: 100%;
-  margin-top: 26px;
-  padding: 30px;
+  flex-grow: 1; /* Растягивает элемент на всю доступную ширину */
+  display: flex;
+  flex-direction: column; /* Для вертикального управления содержимым */
+  height: 100%; /* Занимает всю высоту родительского элемента */
+  justify-content: space-between; /* Распределяет содержимое с равными промежутками между элементами */
 }
 
 /*2.1 Задать размеры контейнеру .result__video-container и добавить отступ снизу:*/
@@ -130,9 +134,10 @@ ol {
 /*5.2 поля формы*/
 .search-form__label {
   display: flex;
+  align-items: center;
+  gap: 5px;
   width: fit-content;
-  /*чтобы у чекбоксов не было отступа при просмотре с клавы*/
-  margin-bottom: 0;
+  cursor: pointer;
 }
 /*4.1 Оформить текст элементов .search-form__fieldset-title.
 Обратить внимание на вес шрифта, размер, отступы.*/
@@ -143,7 +148,7 @@ ol {
   font-style: normal;
   font-weight: 400;
   line-height: normal;
-  gap: 5px;
+  margin-block-end: 2px;
 }
 /*4.2 Оформить элемент .title и вложенный в него .content__accent*/
 .content__accent {
@@ -222,6 +227,8 @@ a {
   align-items: center;
   /* 5.6 */
   appearance: none;
+  /*Pixel Perfect*/
+  margin-bottom: 4px;
 }
 .search-form__textfield:active {
   border: 1px solid white !important;
@@ -236,37 +243,32 @@ a {
 /* 5.5 Чек-боксы в лин*/
 .search-form__checkbox-list {
   display: flex;
-  flex-direction: row;
-  flex-wrap: wrap;
-  gap: 10px; /* Расстояние между чекбоксами */
-  align-items:stretch; /* Выравнивание по центру по вертикали */
-  margin-top: 5px;
+  gap: 15px;
 }
 /* 5.7*/
 .search-form__pseudo-checkbox  {
+  /*pixel perfect*/
+  margin-top: 6px;
+   /*pixel perfect*/
   display: flex;
-  align-items: center;
   justify-content: center;
-  width: 19px; /* Ширина квадрата */
-  height: 19px; /* Высота квадрата */
-  background-color: transparent;
-  border: 1px solid white;
-  box-sizing: content-box;
-  margin-right: 8px; /* Расстояние между псевдо-чекбоксом и текстом */
-  position: relative;
+  align-items: center;
+  inline-size: 19px;
+  block-size: 19px;
+  border: 1px solid #fff;
 }
 /* Псевдоэлемент для активного чекбокса */
-.search-form__checkbox:checked + .search-form__pseudo-checkbox::before {
+.search-form__checkbox:checked + .search-form__pseudo-checkbox::after {
   content: '';
-  display: block;
-  background-color: white;
-  width: 17px;
-  height: 17px;
-  position: absolute;
-  top: 50%;
-  left: 50%;
-  transform: translate(-50%, -50%);
+  min-inline-size: 15px;
+  min-block-size: 15px;
+  background-color: #fff;
 }
+.search-form__label-text {
+  /*pixel perfect*/
+  margin-top: 2px;
+}
+
 .search-form__label:hover .search-form__label-text {
   text-decoration: underline;
   text-underline-position: under;
@@ -309,6 +311,7 @@ a {
   align-items: center;
   gap: 10px;
   flex-shrink: 0;
+  margin-top: 20px;
 }
 /*кнопка в списке карточек*/
 .more-button {
