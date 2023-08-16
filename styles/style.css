@@ -71,6 +71,10 @@ ol {
   /* Скрываем дорожку скроллбара по желанию*/
   scrollbar-width: none;
   -ms-overflow-style: none;
+  /* Для того чтобы outline вмещался в ширину контейнера и не "исчезал" за его пределами*/
+  padding-left: 4px;
+  padding-right: 4px;
+  padding-bottom: 4px; 
 }
 /*1.6 Растянуть .content__details во всю доступную ширину и высоту контейнера
  и добавить отступы между заголовком и зоной с карточками:*/
@@ -294,6 +298,7 @@ a {
 .button:focus {
   outline: 2px solid white; /* Желаемый контур */
   outline-offset: 2px; /* Отступ контура */
+  
 }
 /*кнопка в форме*/
 .search-form__submit-button {
