@@ -373,21 +373,23 @@ ol {
 .content__card-link_current {
   background-color: #545050;
 }
-li .content__card-link:hover .content__video-card-title,
-li .content__card-link:hover .content__video-card-description {
+
+.content__card-link:hover .content__video-card-title,
+.content__card-link:hover .content__video-card-description {
   text-decoration: underline;
   text-underline-position: under;
 }
 
 /* Состояние :active */
-.content__card-link:active .content__video-card {
+.content__card-link:active {
   background-color: #545050;
 }
+
 /* Сброс обводки для состояния :focus */
-li .content__card-link:focus {
+.content__card-link:focus {
   outline: none;
 }
 
-li .content__card-link:focus-visible .content__video-card {
-  border: 1px solid white;
+.content__card-link:focus-visible {
+  outline: 1px solid white;
 }
