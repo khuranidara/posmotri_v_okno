@@ -16,9 +16,6 @@ html {
   font-family: 'Fira Sans Condensed', sans-serif;
   font-size: 18px;
   background-color: #1b1919;
-  /*pixel perfect*/
-  margin-top: 30px;
-  /*pixel perfect*/
   /*1.1 Расположить блок .content посередине .page:*/
   display: flex;
   justify-content: center;
@@ -44,6 +41,7 @@ ul,
 ol {
   list-style: none;
 }
+
 /*1.2 Расположить элементы .content в строку, прижав к низу вертикальной оси:*/
 .content {
   display: flex;
@@ -51,9 +49,10 @@ ol {
   justify-content: space-between;
   align-items: flex-end;
   /*1.3 Задать горизонтальные размеры .content и отступы между его элементами:*/
-  width: 1140px;
+  inline-size: 1140px; /* Замена "width" на "inline-size" */
   gap: 30px;
 }
+
 /*1.4 Расположить элементы .search-form в строку
 и пропорционально распределить между ними свободное пространство,
 прижать их к началу контейнера:*/
@@ -63,10 +62,11 @@ ol {
   justify-content: space-between;
   align-items: flex-start;
 }
+
 /*1.5 Установить вертикальный размер для .content__list 
 и добавить скролл при переполнении:*/
 .content__list {
-  min-width: 399px;
+  max-width: 399px;/*с минимальным значением элемент может занять все доступное ему пространство*/
   height: 298px;
   overflow-y: auto;
   /* 3.1 Позиционирование прелоадеров*/
@@ -75,18 +75,19 @@ ol {
   scrollbar-width: none;
   -ms-overflow-style: none;
   /* Для того чтобы outline вмещался в ширину контейнера и не "исчезал" за его пределами*/
-  padding-left: 4px;
-  padding-right: 4px;
-  padding-bottom: 4px; 
+  /* Используем margin вместо padding */
+  margin: 0 4px 4px;
 }
+
 /*1.6 Растянуть .content__details во всю доступную ширину и высоту контейнера
  и добавить отступы между заголовком и зоной с карточками:*/
- .content__details {
+.content__details {
   flex-grow: 1; /* Растягивает элемент на всю доступную ширину */
   display: flex;
   flex-direction: column; /* Для вертикального управления содержимым */
   height: 100%; /* Занимает всю высоту родительского элемента */
-  justify-content: space-between; /* Распределяет содержимое с равными промежутками между элементами */
+  /*justify-content: space-between; /* Распределяет содержимое с равными промежутками между элементами */
+  gap: 20px; /* применяем gap для создания отступов между дочерними элементами */
 }
 
 /*2.1 Задать размеры контейнеру .result__video-container и добавить отступ снизу:*/
@@ -97,40 +98,52 @@ ol {
   /* 3.1 Позиционирование прелоадеров*/
   position: relative;
 }
+
 /*2.2 Замостить видео в контейнере:*/
-.result__video-container video {
-  width: 100%;
-  height: 100%;
-  object-fit: cover;
+.result__video {
+  width: 100%; 
+  height: 100%; 
+  object-fit: cover; 
+  object-position: center;  /* Спозиционировать отрисовку видео по центру */
 }
+
 /*2.3 Создать вертикальные отступы между элементами .content__list-item (кроме последнего):*/
 .content__list-item:not(:last-child) {
-  margin-bottom: 16px;
+  margin-bottom: 30px;
 }
+
 /*2.4 Расположить элементы внутри контейнера .content__video-card в строку, прижав к началу:*/
 .content__video-card {
   display: flex;
   flex-direction: row;
   align-items: flex-start;
 }
+
 /*2.5 Задать размеры .content__video-card-thumbnail и замостить в них изображение:*/
 .content__video-card-thumbnail {
-  width: 194px;
-  height: 103px;
+  width: 194px; 
+  height: 103px; 
+  object-fit: cover;  /* сохраняет пропорции исходного изображения */
+  object-position: center;  /* спозиционировать отрисовку изображения по центру */
+  display: block;  /* убирает стандартные границы и отступы */
 }
-.content__video-card-thumbnail img {
+
+/*.content__video-card-thumbnail img { некорректный селектор, т.к. в разметке img с классом content__video-card-thumbnail не имеет вложенных img
   width: 100%;
   height: 100%;
   object-fit: cover;
-}
+}*/
+
 /*2.6 Сделать так, чтобы .content__video-card-description-container занимал всё доступное пространство:*/
 .content__video-card-description-container {
-  flex:1;
+  flex-grow: 1;
 }
+
 /* 5.1 поля формы*/
 .search-form__fieldset {
   border: none;
 }
+
 /*5.2 поля формы*/
 .search-form__label {
   display: flex;
@@ -139,6 +152,7 @@ ol {
   width: fit-content;
   cursor: pointer;
 }
+
 /*4.1 Оформить текст элементов .search-form__fieldset-title.
 Обратить внимание на вес шрифта, размер, отступы.*/
 .search-form__fieldset-title {
@@ -150,30 +164,34 @@ ol {
   line-height: normal;
   margin-block-end: 2px;
 }
+
 /*4.2 Оформить элемент .title и вложенный в него .content__accent*/
 .content__accent {
-  color:#545050;
-  font-family: Oswald;
+  color: #545050;
+  font-family: 'Oswald', 'Arial', sans-serif;
   font-size: 75px;
-  font-style: normal;
   font-weight: 700;
-  line-height: 94%; /* 70.5px */
+  line-height: 94%;
 }
+
 .title {
   color: #FFF;
   font-family: Oswald;
   font-size: 75px;
   font-style: normal;
   font-weight: 700;
-  line-height: 94%;
+  line-height: 0.94; /*рек. рев. Измените значение свойства line-height с 94% на 0.94*/
   text-transform: uppercase;
   margin-bottom: 26px;
 }
+
 /* 4.3 Стили для .content__card-link */
 .content__card-link {
+  display: block; /* Делаем ссылку блочным элементом Шаг.7*/
   text-decoration: none;
   color: #FFF;
 }
+
 /* 4.4 Стили для .content__video-card-title */
 .content__video-card-title {
   color: #FFF;
@@ -185,10 +203,12 @@ ol {
   text-transform: uppercase;
   margin-bottom: 6px;
 }
+
 /* 4.5 Стили для .content__video-card-description */
 .content__video-card-description {
   line-height: 16.2px; /* 90% */
 }
+
 /* 5 Шаг паттерн*/
 .visually-hidden {
   position: absolute;
@@ -199,54 +219,62 @@ ol {
   clip-path: inset(50%);
   white-space: nowrap;
 } 
+
 /* 5.3 Установка cursor: pointer;*/
-.search-form__submit-button, /*Кнопка "Найти"*/
-.search-form__pseudo-checkbox, /*Элементы чекбоксов*/
-.more-button, /*"Показать еще"*/
-a {
-  cursor: pointer;
+.search-form__submit-button {
+  cursor: pointer; 
 }
+
+.search-form__pseudo-checkbox {
+  cursor: pointer; 
+}
+
+.more-button {
+  cursor: pointer; 
+}
+
 /* 5.4 Поле ввода*/
-.search-form__textfield {
-  outline: none;
-  border: none;
-  border-top: 1px solid white;
-  border-right: 1px solid transparent;
-  border-bottom: 1px solid white;
-  border-left: 1px solid transparent;
-  background-color: transparent;
-  margin-top: 5px;
-  display: flex;
-  gap: 10px;
-  width: 225px;
-  height: 27px;
-  color: rgba(255, 255, 255, 0.70);
-  font-family: Fira Sans Condensed;  
-  font-size: 18px;
-  font-weight: 400;
-  align-items: center;
-  /* 5.6 */
-  appearance: none;
-  /*Pixel Perfect*/
-  margin-bottom: 4px;
+.search-form__textfield { 
+  outline: none; 
+  border: none; 
+  border-block-start: 1px solid white;  /* border-top */
+  border-block-end: 1px solid white;    /* border-bottom */
+  background-color: transparent; 
+  margin-top: 5px; 
+  width: 225px; 
+  height: 27px; 
+  color: rgba(255, 255, 255, 0.70); 
+  font-family: 'Fira Sans Condensed', sans-serif; /* Важно указать fallback шрифт */
+  font-size: 18px; 
+  font-weight: 400; 
+  align-items: center;  /* Это свойство вряд ли влияет на input, учитывая что у него нет дочерних элементов. */
+  appearance: none; 
+  margin-bottom: 4px; 
 }
+
+.search-form__textfield:hover {
+  cursor: text;
+}
+
 .search-form__textfield:active {
-  border: 1px solid white !important;
-  outline: none !important;
+  border: 1px solid white; 
+  outline: none; 
 }
+
 .search-form__textfield:focus {
-  border-left: none;
-  border-right: none;
+  border: none;
   outline-offset: 2px;
-  outline: 2px solid white; /* Цвет и толщина outline по вашему усмотрению */
+  outline: 1px solid white; 
 }
+
 /* 5.5 Чек-боксы в лин*/
 .search-form__checkbox-list {
   display: flex;
   gap: 15px;
 }
+
 /* 5.7*/
-.search-form__pseudo-checkbox  {
+.search-form__pseudo-checkbox {
   /*pixel perfect*/
   margin-top: 6px;
    /*pixel perfect*/
@@ -257,6 +285,7 @@ a {
   block-size: 19px;
   border: 1px solid #fff;
 }
+
 /* Псевдоэлемент для активного чекбокса */
 .search-form__checkbox:checked + .search-form__pseudo-checkbox::after {
   content: '';
@@ -264,6 +293,7 @@ a {
   min-block-size: 15px;
   background-color: #fff;
 }
+
 .search-form__label-text {
   /*pixel perfect*/
   margin-top: 2px;
@@ -273,56 +303,59 @@ a {
   text-decoration: underline;
   text-underline-position: under;
 }
-.search-form__checkbox-label:has(:focus-visible) {
+
+.search-form__label:has(:focus-visible) {
   outline: 1px solid white;
 }
+
 .button {
   cursor: pointer;
   border: 1px solid white;
   background-color: transparent;
-  padding: 10px 20px;
   color: #FFF;
   text-align: center;
-  font-family: Fira Sans Condensed;
+  font-family: 'Fira Sans Condensed';
   font-size: 18px;
   font-style: normal;
   font-weight: 700;
   line-height: normal;
+  display: flex; 
+  flex-shrink: 0; 
+  justify-content: center; 
+  align-items: center; 
 }
+
 .button:active {
   background-color: #545050;
-  outline: none !important; /* Убедимся, что нет контура */
-  text-decoration: none !important; /* Убедимся, что нет подчеркивания */
 }
 .button:hover {
   text-decoration: underline;
 }
-.button:focus {
-  outline: 2px solid white; /* Желаемый контур */
-  outline-offset: 2px; /* Отступ контура */
-  
+
+/* Убираем контур при фокусе */
+.button:focus { 
+  outline: none;
 }
+
+/* Задаем контур только при фокусе, который осуществляется с клавиатуры */
+.button:focus-visible {
+  outline: 2px solid white;
+  outline-offset: 2px;
+}
+
 /*кнопка в форме*/
 .search-form__submit-button {
-  display: flex;
-  width: 194px;
-  height: 34px;
-  justify-content: center;
-  align-items: center;
-  gap: 10px;
-  flex-shrink: 0;
+  width: 194px; 
+  height: 34px; 
   margin-top: 20px;
 }
+
 /*кнопка в списке карточек*/
 .more-button {
-  display: flex;
-  width: 399px;
-  height: 34px;
-  justify-content: center;
-  align-items: center;
-  gap: 10px;
-  flex-shrink: 0;
+  width: 100%;  /* Меняем на 100% */
+  height: 34px; 
 }
+
 /* Применение стилей к скроллбару по желанию */
 .content__list::-webkit-scrollbar {
   width: 5px; /* Ширина скроллбара */
@@ -337,7 +370,7 @@ a {
 }
 
 /*Шаг 7. текущая карточка*/
-.content__card-link_current .content__video-card {
+.content__card-link_current {
   background-color: #545050;
 }
 li .content__card-link:hover .content__video-card-title,
