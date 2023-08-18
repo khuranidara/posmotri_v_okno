@@ -12,10 +12,10 @@ html {
   inline-size: 1200px;
   block-size: 100%;
   margin: auto;
-  color: #fff;
+  color: rgba(255, 255, 255, 1);
   font-family: 'Fira Sans Condensed', sans-serif;
   font-size: 18px;
-  background-color: #1b1919;
+  background-color: rgba(27, 25, 25, 1);
   /*1.1 Расположить блок .content посередине .page:*/
   display: flex;
   justify-content: center;
@@ -92,9 +92,9 @@ ol {
 
 /*2.1 Задать размеры контейнеру .result__video-container и добавить отступ снизу:*/
 .result__video-container {
-  width: 711px;
-  height: 386px;
-  margin-bottom: 16px;
+  inline-size: 711px; /* замена width */
+  block-size: 386px; /* замена height */
+  margin-block-end: 16px; /* замена margin-bottom */
   /* 3.1 Позиционирование прелоадеров*/
   position: relative;
 }
@@ -109,7 +109,7 @@ ol {
 
 /*2.3 Создать вертикальные отступы между элементами .content__list-item (кроме последнего):*/
 .content__list-item:not(:last-child) {
-  margin-bottom: 30px;
+  margin-block-end: 30px; /* замена margin-bottom */
 }
 
 /*2.4 Расположить элементы внутри контейнера .content__video-card в строку, прижав к началу:*/
@@ -121,18 +121,12 @@ ol {
 
 /*2.5 Задать размеры .content__video-card-thumbnail и замостить в них изображение:*/
 .content__video-card-thumbnail {
-  width: 194px; 
-  height: 103px; 
+  inline-size: 194px; 
+  block-size: 103px;  
   object-fit: cover;  /* сохраняет пропорции исходного изображения */
   object-position: center;  /* спозиционировать отрисовку изображения по центру */
   display: block;  /* убирает стандартные границы и отступы */
 }
-
-/*.content__video-card-thumbnail img { некорректный селектор, т.к. в разметке img с классом content__video-card-thumbnail не имеет вложенных img
-  width: 100%;
-  height: 100%;
-  object-fit: cover;
-}*/
 
 /*2.6 Сделать так, чтобы .content__video-card-description-container занимал всё доступное пространство:*/
 .content__video-card-description-container {
@@ -156,57 +150,45 @@ ol {
 /*4.1 Оформить текст элементов .search-form__fieldset-title.
 Обратить внимание на вес шрифта, размер, отступы.*/
 .search-form__fieldset-title {
-  color: #FFF;
+  color: rgba(255, 255, 255, 1);
   font-family: 'Fira Sans Condensed', sans-serif;
   font-size: 18px;
   font-style: normal;
   font-weight: 400;
-  line-height: normal;
+  line-height: normal; /*normal надо ли менять при относ. знач. обычно примерно равно 1.2??*/
   margin-block-end: 2px;
 }
 
-/*4.2 Оформить элемент .title и вложенный в него .content__accent*/
-.content__accent {
-  color: #545050;
-  font-family: 'Oswald', 'Arial', sans-serif;
-  font-size: 75px;
-  font-weight: 700;
-  line-height: 94%;
-}
-
 .title {
-  color: #FFF;
-  font-family: Oswald;
+  color:rgba(255, 255, 255, 1);
+  font-family: 'Oswald', 'Arial', sans-serif;
   font-size: 75px;
   font-style: normal;
   font-weight: 700;
-  line-height: 0.94; /*рек. рев. Измените значение свойства line-height с 94% на 0.94*/
+  line-height: 0.94;
   text-transform: uppercase;
   margin-bottom: 26px;
 }
 
-/* 4.3 Стили для .content__card-link */
-.content__card-link {
-  display: block; /* Делаем ссылку блочным элементом Шаг.7*/
-  text-decoration: none;
-  color: #FFF;
+.content__accent {
+  color: rgba(84, 80, 80, 1);
 }
 
 /* 4.4 Стили для .content__video-card-title */
 .content__video-card-title {
-  color: #FFF;
+  color: rgba(255, 255, 255, 1);
   font-family: 'Oswald', sans-serif;
   font-size: 30px;
   font-style: normal;
   font-weight: 700;
-  line-height: 100%; /* 30px */
+  line-height: 1; /* Эквивалент 30px при font-size: 30px */
   text-transform: uppercase;
-  margin-bottom: 6px;
+  margin-block-end: 6px; /* замена margin-bottom */
 }
 
 /* 4.5 Стили для .content__video-card-description */
 .content__video-card-description {
-  line-height: 16.2px; /* 90% */
+  line-height: 0.9; /* Это эквивалентно 90% */
 }
 
 /* 5 Шаг паттерн*/
@@ -220,36 +202,20 @@ ol {
   white-space: nowrap;
 } 
 
-/* 5.3 Установка cursor: pointer;*/
-.search-form__submit-button {
-  cursor: pointer; 
-}
-
-.search-form__pseudo-checkbox {
-  cursor: pointer; 
-}
-
-.more-button {
-  cursor: pointer; 
-}
-
 /* 5.4 Поле ввода*/
-.search-form__textfield { 
+.search-form__textfield {
   outline: none; 
   border: none; 
-  border-block-start: 1px solid white;  /* border-top */
-  border-block-end: 1px solid white;    /* border-bottom */
+  border-block-start: 1px solid rgba(255, 255, 255, 1);  /* border-top */
+  border-block-end: 1px solid rgba(255, 255, 255, 1);    /* border-bottom */
   background-color: transparent; 
-  margin-top: 5px; 
-  width: 225px; 
-  height: 27px; 
+  min-inline-size: 225px;
+  min-block-size: 27px;
   color: rgba(255, 255, 255, 0.70); 
   font-family: 'Fira Sans Condensed', sans-serif; /* Важно указать fallback шрифт */
   font-size: 18px; 
   font-weight: 400; 
-  align-items: center;  /* Это свойство вряд ли влияет на input, учитывая что у него нет дочерних элементов. */
   appearance: none; 
-  margin-bottom: 4px; 
 }
 
 .search-form__textfield:hover {
@@ -257,14 +223,14 @@ ol {
 }
 
 .search-form__textfield:active {
-  border: 1px solid white; 
+  border: 1px solid rgba(255, 255, 255, 1); 
   outline: none; 
 }
 
 .search-form__textfield:focus {
   border: none;
   outline-offset: 2px;
-  outline: 1px solid white; 
+  outline: 1px solid rgba(255, 255, 255, 1); 
 }
 
 /* 5.5 Чек-боксы в лин*/
@@ -275,15 +241,16 @@ ol {
 
 /* 5.7*/
 .search-form__pseudo-checkbox {
+  cursor: pointer;
   /*pixel perfect*/
-  margin-top: 6px;
+  margin-block-start: 6px; /* замена margin-top */
    /*pixel perfect*/
   display: flex;
   justify-content: center;
   align-items: center;
   inline-size: 19px;
   block-size: 19px;
-  border: 1px solid #fff;
+  border: 1px solid rgba(255, 255, 255, 1);
 }
 
 /* Псевдоэлемент для активного чекбокса */
@@ -291,12 +258,12 @@ ol {
   content: '';
   min-inline-size: 15px;
   min-block-size: 15px;
-  background-color: #fff;
+  background-color: rgba(255, 255, 255, 1);
 }
 
 .search-form__label-text {
   /*pixel perfect*/
-  margin-top: 2px;
+  margin-block-start: 2px; /* замена margin-top */
 }
 
 .search-form__label:hover .search-form__label-text {
@@ -305,16 +272,16 @@ ol {
 }
 
 .search-form__label:has(:focus-visible) {
-  outline: 1px solid white;
+  outline: 1px solid rgba(255, 255, 255, 1);
 }
 
 .button {
   cursor: pointer;
-  border: 1px solid white;
+  border: 1px solid rgba(255, 255, 255, 1);
   background-color: transparent;
-  color: #FFF;
+  color: rgba(255, 255, 255, 1);
   text-align: center;
-  font-family: 'Fira Sans Condensed';
+  font-family: 'Fira Sans Condensed', 'Arial', sans-serif;
   font-size: 18px;
   font-style: normal;
   font-weight: 700;
@@ -323,10 +290,11 @@ ol {
   flex-shrink: 0; 
   justify-content: center; 
   align-items: center; 
+  block-size: 34px; /* замена для height, общий стиль для всех кнопок */
 }
 
 .button:active {
-  background-color: #545050;
+  background-color: rgba(84, 80, 80, 1);
 }
 .button:hover {
   text-decoration: underline;
@@ -339,26 +307,24 @@ ol {
 
 /* Задаем контур только при фокусе, который осуществляется с клавиатуры */
 .button:focus-visible {
-  outline: 2px solid white;
+  outline: 1px solid rgba(255, 255, 255, 1);
   outline-offset: 2px;
 }
 
 /*кнопка в форме*/
 .search-form__submit-button {
-  width: 194px; 
-  height: 34px; 
-  margin-top: 20px;
+  inline-size: 194px; /* замена width */
+  margin-block-start: 20px; /* замена margin-top */
 }
 
 /*кнопка в списке карточек*/
 .more-button {
-  width: 100%;  /* Меняем на 100% */
-  height: 34px; 
+  inline-size: 100%; /* замена width */
 }
 
 /* Применение стилей к скроллбару по желанию */
 .content__list::-webkit-scrollbar {
-  width: 5px; /* Ширина скроллбара */
+  inline-size: 5px; /* замена width для логической семантики, хотя это свойство применяется только для WebKit */
 
 }
 .content__list::-webkit-scrollbar-thumb {
@@ -369,20 +335,26 @@ ol {
   background-color: rgba(0, 0, 0, 0.7); /* Цвет ползунка при наведении */
 }
 
-/*Шаг 7. текущая карточка*/
-.content__card-link_current {
-  background-color: #545050;
+/* 4.3 Стили для .content__card-link */
+.content__card-link {
+  display: block; /* Делаем ссылку блочным элементом Шаг.7*/
+  text-decoration: none;
+  color: rgba(255, 255, 255, 1);
 }
 
-.content__card-link:hover .content__video-card-title,
-.content__card-link:hover .content__video-card-description {
+/*Шаг 7. текущая карточка*/
+.content__card-link_current {
+  background-color: rgba(84, 80, 80, 1);
+}
+
+.content__card-link:hover {
   text-decoration: underline;
   text-underline-position: under;
 }
 
 /* Состояние :active */
 .content__card-link:active {
-  background-color: #545050;
+  background-color: rgba(84, 80, 80, 1);
 }
 
 /* Сброс обводки для состояния :focus */
@@ -391,5 +363,5 @@ ol {
 }
 
 .content__card-link:focus-visible {
-  outline: 1px solid white;
+  outline: 1px solid rgba(255, 255, 255, 1);
 }
